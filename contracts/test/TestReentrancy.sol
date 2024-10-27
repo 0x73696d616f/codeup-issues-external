@@ -81,10 +81,10 @@ contract ClaimCodeupERC20Reentrancy is ERC20 {
     }
 
     function claimCodeupERC20() external {
-        codeup.claimCodeupERC20(address(this));
+        codeup.claimCodeupERC20(address(this), 0, 0, 0);
     }
 
     receive() external payable {
-        codeup.claimCodeupERC20(address(this));
+        codeup.claimCodeupERC20(address(this), 0, 0, 0);
     }
 }

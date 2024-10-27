@@ -1,5 +1,5 @@
 [
-  "constructor(address)",
+  "constructor()",
   "error ERC20InsufficientAllowance(address,uint256,uint256)",
   "error ERC20InsufficientBalance(address,uint256,uint256)",
   "error ERC20InvalidApprover(address)",
@@ -8,11 +8,9 @@
   "error ERC20InvalidSpender(address)",
   "event Approval(address indexed,address indexed,uint256)",
   "event Transfer(address indexed,address indexed,uint256)",
-  "function addTokens() payable",
   "function allowance(address,address) view returns (uint256)",
   "function approve(address,uint256) returns (bool)",
   "function balanceOf(address) view returns (uint256)",
-  "function collect()",
   "function decimals() view returns (uint8)",
   "function deposit() payable",
   "function name() view returns (string)",
@@ -21,6 +19,5 @@
   "function totalSupply() view returns (uint256)",
   "function transfer(address,uint256) returns (bool)",
   "function transferFrom(address,address,uint256) returns (bool)",
-  "function updateCodeUp(address)",
-  "function upgrade(uint256)"
+  "function updateCodeUp(address)"
 ]

@@ -12,12 +12,4 @@ contract TestFactory {
     function setCodeup(address _codeup) external {
         codeup = Codeup(_codeup);
     }
-
-    function createPair(
-        address tokenA,
-        address tokenB
-    ) external returns (address pair) {
-        pair = address(this);
-        codeup.claimCodeupERC20(tx.origin);
-    }
 }

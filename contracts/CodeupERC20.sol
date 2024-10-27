@@ -8,8 +8,6 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 contract CodeupERC20 is ERC20, Ownable {
     uint256 private constant _MAX_SUPPLY = 1000000000 ether;
 
-    error TransferFailed();
-
     constructor(
         address _initialOwner,
         string memory _name,

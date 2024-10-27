@@ -2,7 +2,7 @@ import { ethers } from "hardhat";
 import { Codeup } from "../typechain-types";
 import { verifyContract } from "./verify";
 
-const COINS_PRICE = ethers.utils.parseEther("0.000001");
+const COINS_PRICE = ethers.utils.parseEther("0.0000001"); // new price;
 const startTimeUnix = "1";
 const deployer = process.env.DEPLOYER_ADDRESS
   ? process.env.DEPLOYER_ADDRESS

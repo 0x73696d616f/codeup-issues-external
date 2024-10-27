@@ -1,5 +1,4 @@
 [
   "constructor()",
-  "function createPair(address,address) returns (address)",
   "function setCodeup(address)"
 ]

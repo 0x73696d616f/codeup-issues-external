@@ -8,7 +8,6 @@
   "error ERC20InvalidSpender(address)",
   "error OwnableInvalidOwner(address)",
   "error OwnableUnauthorizedAccount(address)",
-  "error TransferFailed()",
   "event Approval(address indexed,address indexed,uint256)",
   "event OwnershipTransferred(address indexed,address indexed)",
   "event Transfer(address indexed,address indexed,uint256)",
